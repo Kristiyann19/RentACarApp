@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,16 +29,23 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Add">Add Car</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Books" asp-action="Mine">Rented Cars</a>
-                            </li>
+                            
                         }
+                       @* <form method="get" asp-controller="Car" asp-action="Search">
+                                 <p>
+                                     <input type="search" placeholder="Enter car make or model..."  name="Searching" style="width:300px;" />
+                                     <input type ="submit" value="Search" class="btn btn-primary"/>
+                                 </p>
+                        </form>*@
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

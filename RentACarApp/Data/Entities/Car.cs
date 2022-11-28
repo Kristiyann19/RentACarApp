@@ -22,10 +22,13 @@ namespace RentACarApp.Data.Entities
         [Required]
         public decimal Price { get; set; }
 
+        [Required]
+        [Range(50, 2000)]
+        public int HorsePower { get; set; }
 
         [Required]
-        [MaxLength(3000)]
-        public string Description { get; set; } = null!;
+        [MaxLength(30)]
+        public string Color { get; set; }
 
         [Required]
         public string ImageUrl { get; set; } = null!;

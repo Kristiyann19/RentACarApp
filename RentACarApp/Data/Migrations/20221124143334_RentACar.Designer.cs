@@ -12,7 +12,7 @@ using RentACarApp.Data;
 namespace RentACarApp.Data.Migrations
 {
     [DbContext(typeof(RentACarAppDbContext))]
-    [Migration("20221113164933_RentACar")]
+    [Migration("20221124143334_RentACar")]
     partial class RentACar
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,12 +169,15 @@ namespace RentACarApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Color")
                         .IsRequired()
-                        .HasMaxLength(3000)
-                        .HasColumnType("nvarchar(3000)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("EngineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HorsePower")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -212,13 +215,40 @@ namespace RentACarApp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "The 2015 BMW 4 Series is now available with Oyster Dakota leather, Brushed Aluminum trim, new 18-inch and 19-inch wheels in the Luxury Line trim. ",
+                            Color = "White Metallic",
                             EngineId = 2,
+                            HorsePower = 358,
                             ImageUrl = "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/KDgVJ2G8.NfXWiaxfK-(edit).jpg?t=164667913335",
                             Make = "BMW",
                             Model = "440",
-                            Price = 32000m,
+                            Price = 300m,
                             TypeCarId = 6,
+                            Year = 2017
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Color = "White Metallic",
+                            EngineId = 2,
+                            HorsePower = 510,
+                            ImageUrl = "https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/mercedes-benz-c63s-amg-2015-australia-%285%29.jpg",
+                            Make = "Mercedes-Benz",
+                            Model = "C63 AMG S",
+                            Price = 400m,
+                            TypeCarId = 4,
+                            Year = 2015
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Color = "Red Metallic",
+                            EngineId = 3,
+                            HorsePower = 420,
+                            ImageUrl = "https://thedriven.io/wp-content/uploads/2019/09/car-sales-model-s-2017.jpg",
+                            Make = "Tesla",
+                            Model = "Model S",
+                            Price = 300m,
+                            TypeCarId = 4,
                             Year = 2017
                         });
                 });

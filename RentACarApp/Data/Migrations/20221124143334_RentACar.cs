@@ -68,7 +68,8 @@ namespace RentACarApp.Data.Migrations
                     Model = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(3000)", maxLength: 3000, nullable: false),
+                    HorsePower = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EngineId = table.Column<int>(type: "int", nullable: false),
                     TypeCarId = table.Column<int>(type: "int", nullable: false)
@@ -140,8 +141,18 @@ namespace RentACarApp.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "Description", "EngineId", "ImageUrl", "Make", "Model", "Price", "TypeCarId", "Year" },
-                values: new object[] { 1, "The 2015 BMW 4 Series is now available with Oyster Dakota leather, Brushed Aluminum trim, new 18-inch and 19-inch wheels in the Luxury Line trim. ", 2, "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/KDgVJ2G8.NfXWiaxfK-(edit).jpg?t=164667913335", "BMW", "440", 32000m, 6, 2017 });
+                columns: new[] { "Id", "Color", "EngineId", "HorsePower", "ImageUrl", "Make", "Model", "Price", "TypeCarId", "Year" },
+                values: new object[] { 1, "White Metallic", 2, 358, "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/KDgVJ2G8.NfXWiaxfK-(edit).jpg?t=164667913335", "BMW", "440", 300m, 6, 2017 });
+
+            migrationBuilder.InsertData(
+                table: "Cars",
+                columns: new[] { "Id", "Color", "EngineId", "HorsePower", "ImageUrl", "Make", "Model", "Price", "TypeCarId", "Year" },
+                values: new object[] { 2, "White Metallic", 2, 510, "https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/mercedes-benz-c63s-amg-2015-australia-%285%29.jpg", "Mercedes-Benz", "C63 AMG S", 400m, 4, 2015 });
+
+            migrationBuilder.InsertData(
+                table: "Cars",
+                columns: new[] { "Id", "Color", "EngineId", "HorsePower", "ImageUrl", "Make", "Model", "Price", "TypeCarId", "Year" },
+                values: new object[] { 3, "Red Metallic", 3, 420, "https://thedriven.io/wp-content/uploads/2019/09/car-sales-model-s-2017.jpg", "Tesla", "Model S", 300m, 4, 2017 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_EngineId",

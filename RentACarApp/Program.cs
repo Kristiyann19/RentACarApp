@@ -14,7 +14,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequiredLength = 6;
 })
     .AddEntityFrameworkStores<RentACarAppDbContext>();
@@ -25,9 +25,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddScoped<ICarService, CarService>();
 
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -36,7 +38,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    
     app.UseHsts();
 }
 

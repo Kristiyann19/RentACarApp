@@ -4,21 +4,39 @@
 @inject UserManager<User> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-   <li class="nav-item">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @*HERE IS THE ACCOUNT ICON WHERE MY CART WILL SIT WITH RENTED CARS WAITING TO BE PAID*@
+        <li class="nav-item dropdown">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button"
+                    data-bs-toggle="dropdown">Hello @UserManager.GetUserName(User)!</button>
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                         <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Rented">My Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+
+
+        <li class="nav-item">
             <form class="form-inline" asp-controller="User" asp-action="Logout" asp-route-id="@UserManager.GetUserId(User)">
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
         </li>
-}
-else
-{
-    <li class="nav-item">
+
+        
+    }
+    else
+    {
+        <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="User" asp-action="Register">Register</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="User" asp-action="Login">Login</a>
         </li>
-}
+    }
 </ul>
+

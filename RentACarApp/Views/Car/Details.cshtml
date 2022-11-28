@@ -1,0 +1,39 @@
+﻿@model CarViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-center row">
+
+    <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@Model.ImageUrl" alt="Car Image">
+            <div class="card-body">
+
+                <h5 class="card-title mt-1">@Model.Make @Model.Model</h5>
+                <p class="mb-0">Year: @Model.Year</p>
+                <p class="mb-0">Price: @Model.Price$</p>
+                <p class="mb-0">Color: @Model.Color</p>
+                <p class="mb-0">HorsePower: @Model.HorsePower</p>
+                <p class="mb-0">Type: @Model.TypeCar</p>
+                <p class="mb-0">Engine: @Model.Engine</p>
+                
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                <form class="input-group-sm" asp-controller="Car" asp-action="AddToCollection" asp-route-carId="@Model.Id">
+                <input type="submit" value="Rent" class="fs-6 btn btn-success mb-3 p-2" />
+            </form>
+            }
+            
+                <form class="input-group-sm" asp-controller="Car" asp-action="BackToList" asp-route-carId="@Model.Id">
+                <input type="submit" value="Back To List" class="fs-6 btn btn-success mb-3 p-2" />
+            </form>
+            </div>
+        </div>
+
+
+    @*@foreach (var car in Model)
+    {
+        
+    }*@
+</div>

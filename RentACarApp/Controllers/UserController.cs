@@ -10,7 +10,6 @@ namespace RentACarApp.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
-
         private readonly SignInManager<User> signInManager;
 
         public UserController(UserManager<User> _userManager,
@@ -20,14 +19,21 @@ namespace RentACarApp.Controllers
             signInManager = _signInManager;
         }
 
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
+            if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var model = new RegisterViewModel();
 
             return View(model);
         }
+
 
         [AllowAnonymous]
         [HttpPost]
@@ -59,17 +65,24 @@ namespace RentACarApp.Controllers
             return View(model);
         }
 
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
+            if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var model = new LoginViewModel();
 
             return View(model);
         }
 
-        [AllowAnonymous]
+
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -77,24 +90,23 @@ namespace RentACarApp.Controllers
                 return View(model);
             }
 
-            var user = await userManager.FindByEmailAsync(model.UserName);
+            var user = await userManager.FindByNameAsync(model.UserName);
 
             if (user != null)
             {
+
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
 
                 if (result.Succeeded)
                 {
-                    //TODO: MAKE THE RETURN WHEN SUCCESFULY LOGGED IN !
-
-                    return RedirectToAction("Register", "User");
+                    return RedirectToAction("Index", "Home");
                 }
-
             }
 
             ModelState.AddModelError("", "Invalid login");
 
             return View(model);
+
         }
 
         public async Task<IActionResult> Logout()

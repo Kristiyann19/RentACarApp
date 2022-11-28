@@ -3,7 +3,16 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center row">
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="SearchString">Search by car Make or Model:</label>
+        <input type="text" name="SearchString" value=@ViewData["CurrentFilter"]/>
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+
+</form>
+
+   <div class="text-center row">
     @foreach (var car in Model)
     {
         <div class="card col-4" style="width: 20rem; ">
@@ -11,19 +20,26 @@
              src="@car.ImageUrl" alt="Car Image">
             <div class="card-body">
 
-                <h5 class="card-title mt-1">@car.Make</h5>
-                <p class="mb-0">Model: @car.Model</p>
+                <h5 class="card-title mt-1">@car.Make @car.Model</h5>
                 <p class="mb-0">Year: @car.Year</p>
-                <p>Type: @car.TypeCar</p>
-                <p>Engine: @car.Engine</p>
+                <p class="mb-0">Price: @car.Price$</p>
+                <p class="mb-0">Type: @car.TypeCar</p>
+                <p class="mb-0">Engine: @car.Engine</p>
             </div>
 
-            <form class="input-group-sm" asp-controller="Car" asp-action="AddToCollection" asp-route-carId="@car.Id">
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                @*Must edit the form of rent*@
+                <form class="input-group-sm" asp-controller="Car" asp-action="RentCarToCart" asp-route-carId="@car.Id">
                 <input type="submit" value="Rent" class="fs-6 btn btn-success mb-3 p-2" />
             </form>
-            <form class="input-group-sm" asp-controller="Car" asp-action="MoreInfo" asp-route-carId="@car.Id">
-                <input type="submit" value="More Info" class="fs-6 btn btn-success mb-3 p-2" />
+            }
+            
+            
+            <form class="input-group-sm" asp-controller="Car" asp-action="Details" asp-route-carId="@car.Id">
+                <input type="submit" value="Details" class="fs-6 btn btn-success mb-3 p-2" />
             </form>
         </div>
     }
-</div>
+</div> 
+
