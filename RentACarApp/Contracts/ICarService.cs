@@ -14,7 +14,7 @@ namespace RentACarApp.Contracts
         Task<IEnumerable<TypeCar>> GetTypeCarAsync();
 
         Task<CarViewModel> GetCarDetails(int carId);
-
+        //cxzcxzkcxzjklcxz
         Task RentCarToCartAsync(int carId, string userId);
 
         Task RemoveCarFromCartAsync(int carId, string userId);
