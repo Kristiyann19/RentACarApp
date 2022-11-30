@@ -85,6 +85,7 @@ namespace RentACarApp.Services
 
         public async Task<CarViewModel> GetCarDetails(int carId)
         {
+
             return await context.Cars
                 .Include(c => c.TypeCar)
                 .Include(c => c.Engine)
@@ -117,6 +118,7 @@ namespace RentACarApp.Services
             {
                 throw new ArgumentException("Invalid user ID");
             }
+
 
             return user.UsersCars
                 .Select(c => new CarViewModel()
@@ -184,27 +186,5 @@ namespace RentACarApp.Services
             return await context.Types.ToListAsync();
         }
 
-
-        //TODO 27.11
-        //public async Task/*<IEnumerable<CarViewModel>>*/ SumOfRentedCarsPrice(string userId)
-        //{
-
-        //    var user = await context.Users
-        //        .Where(u => u.Id == userId)
-        //        .Include(u => u.UsersCars)
-        //        .FirstOrDefaultAsync();
-
-        //    if (user == null)
-        //    {
-        //        throw new ArgumentException("Invalid User Id");
-        //    }
-
-
-        //    var cars = user.UsersCars.ToList();
-
-        //    decimal sum = user.UsersCars.Sum(c => c.Car.Price);
-
-
-        //}
     }
 }

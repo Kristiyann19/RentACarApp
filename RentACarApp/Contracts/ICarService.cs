@@ -14,12 +14,11 @@ namespace RentACarApp.Contracts
         Task<IEnumerable<TypeCar>> GetTypeCarAsync();
 
         Task<CarViewModel> GetCarDetails(int carId);
-        //cxzcxzkcxzjklcxz
+
         Task RentCarToCartAsync(int carId, string userId);
 
         Task RemoveCarFromCartAsync(int carId, string userId);
 
-        //Task/*<IEnumerable<CarViewModel>>*/ SumOfRentedCarsPrice(string userId);
         Task AddCarForRentAsync(AddCarViewModel modell);
 
         Task<IEnumerable<CarViewModel>> GetRentedAsync(string userId);
