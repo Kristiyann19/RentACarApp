@@ -24,6 +24,15 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/User/Login";
 });
 
+
+builder.Services.AddAuthentication()
+    .AddFacebook(options =>
+    {
+        //TODO: Hide them somewhere. They should not be here.
+        options.AppId = "865317174714956";
+        options.AppSecret = "b0861b84303a22ed9af05bf4361798ae";
+    });
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICarService, CarService>();

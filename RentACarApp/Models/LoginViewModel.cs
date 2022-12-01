@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Authentication;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentACarApp.Models
 {
@@ -11,5 +12,6 @@ namespace RentACarApp.Models
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 }
