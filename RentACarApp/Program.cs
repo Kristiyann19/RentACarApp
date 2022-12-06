@@ -36,6 +36,7 @@ builder.Services.AddAuthentication()
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddTransient<IAgentService, AgentService>();
 
 var app = builder.Build();
 

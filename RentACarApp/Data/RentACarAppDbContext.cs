@@ -19,6 +19,8 @@ namespace RentACarApp.Data
 
         public DbSet<Engine> Engines { get; set; }
 
+        public DbSet<Agent> Agents { get; set; } 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -39,8 +41,10 @@ namespace RentACarApp.Data
             builder.ApplyConfiguration(new TypeCarConfiguration());
             builder.ApplyConfiguration(new EngineConfiguration());
             builder.ApplyConfiguration(new CarConfiguration());
+            builder.ApplyConfiguration(new AgentConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
 
-           
+
             base.OnModelCreating(builder);
         }
 
