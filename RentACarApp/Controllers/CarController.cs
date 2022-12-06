@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RentACarApp.Contracts;
 using RentACarApp.Data;
+using RentACarApp.Extensions;
 using RentACarApp.Models;
 using System.Security.Claims;
 
@@ -10,13 +11,14 @@ namespace RentACarApp.Controllers
 {
     public class CarController : Controller
     {
-        private readonly RentACarAppDbContext context;
-             private readonly ICarService carService;
+        private readonly ICarService carService;
 
-        public CarController(ICarService _carService, RentACarAppDbContext _context)
+        private readonly IAgentService agentService;
+
+        public CarController(ICarService _carService, IAgentService _agentService)
         {
             carService = _carService;
-            context = _context;
+            agentService = _agentService;
         }
 
 
@@ -32,6 +34,7 @@ namespace RentACarApp.Controllers
 
             return View(carModel);
         }
+
 
         [AllowAnonymous]
         public IActionResult BackToList()
@@ -75,6 +78,12 @@ namespace RentACarApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            if ((agentService.ExistsById(User.Id())) == false)
+            {
+                return RedirectToAction("Become", "Agent");
+            }
+
+
             var model = new AddCarViewModel()
             {
                 Engines = await carService.GetEngneAsync(),
@@ -84,6 +93,7 @@ namespace RentACarApp.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Add(AddCarViewModel modell)
         {
@@ -92,6 +102,10 @@ namespace RentACarApp.Controllers
                 return View(modell);
             }
 
+            if (agentService.ExistsById(User.Id()) == false)
+            {
+                return RedirectToAction("Become", "Agent");
+            }
 
             await carService.AddCarForRentAsync(modell);
 
@@ -107,29 +121,6 @@ namespace RentACarApp.Controllers
                 return View(modell);
             }
         }
-
-       
-
-        //TODO: 27.11
-        //public async Task<IActionResult> Sum(string userId)
-        //{
-        //    var user = await context.Users
-        //       .Where(u => u.Id == userId)
-        //       .Include(u => u.UsersCars)
-        //       .FirstOrDefaultAsync();
-
-        //    if (user == null)
-        //    {
-        //        throw new ArgumentException("Invalid User Id");
-        //    }
-
-
-        //    var cars = user.UsersCars.ToList();
-
-        //    decimal sum = user.UsersCars.Sum(c => c.Car.Price);
-
-        //    return View(sum);
-        //}
 
     }
 }
