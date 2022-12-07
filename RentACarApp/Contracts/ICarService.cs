@@ -22,6 +22,8 @@ namespace RentACarApp.Contracts
         Task AddCarForRentAsync(AddCarViewModel modell);
 
         Task<IEnumerable<CarViewModel>> GetRentedAsync(string userId);
+
+        void Delete(int carId);
         
     }
 }

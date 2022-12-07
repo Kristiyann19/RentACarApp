@@ -122,5 +122,12 @@ namespace RentACarApp.Controllers
             }
         }
 
+        [Authorize]
+        public IActionResult Delete(int carId)
+        {
+            carService.Delete(carId);
+
+            return RedirectToAction("index", "home");
+        }
     }
 }

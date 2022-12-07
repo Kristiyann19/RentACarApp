@@ -186,5 +186,12 @@ namespace RentACarApp.Services
             return await context.Types.ToListAsync();
         }
 
+        public void Delete(int carId)
+        {
+            var car = context.Cars.FirstOrDefault(c => c.Id == carId);
+
+            context.Remove(car);
+            context.SaveChanges();
+        }
     }
 }

@@ -21,8 +21,8 @@ namespace RentACarApp.Services
                 PhoneNumber = phoneNumber
             };
 
-            context.AddAsync(agent);
-            context.SaveChangesAsync();
+            context.Agents.Add(agent);
+            context.SaveChanges();
         }
 
         public bool ExistsById(string userId)
