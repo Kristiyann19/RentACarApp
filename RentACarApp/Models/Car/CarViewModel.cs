@@ -1,4 +1,6 @@
-﻿namespace RentACarApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RentACarApp.Models
 {
     public class CarViewModel
     {
@@ -21,6 +23,9 @@
         public string? TypeCar { get; set; }
 
         public string? Engine { get ; set; }
+
+        [Display(Name = "Is Rented")]
+        public bool IsRented { get; init; }
     }
 }
 

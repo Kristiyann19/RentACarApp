@@ -21,39 +21,8 @@ namespace RentACarApp.Services
         => context.Cars.Any(c => c.Id == id);
 
 
-        public bool isRented(int carId, string userId)
-        {
-
-            throw new ArgumentException();
-            //var user = context.Users
-            //    .Where(u => u.Id == userId)
-            //    .Include(u => u.UsersCars)
-            //    .FirstOrDefaultAsync();
-
-            //if (user == null)
-            //{
-            //    throw new ArgumentException("Invalid User Id");
-            //}
-
-            //var car = context.Cars
-            //    .Where(c => c.Id == carId)
-            //    .Include(c => c.TypeCar)
-            //    .Include(c => c.Engine)
-            //    .FirstOrDefaultAsync();
-
-            //if (!user.UsersCars.Any(c => c.CarId == carId))
-            //{
-            //    user.UsersCars.Add(new UserCars()
-            //    {
-            //        CarId = car.Id,
-            //        UserId = user.Id,
-            //        Car = car,
-            //        User = user
-            //    });
-
-            //     context.SaveChangesAsync();
-            //}
-        }
+        public bool isRented(int id)
+        => context.Cars.Find(id).RenterId != null;
 
         public async Task<IEnumerable<CarViewModel>> GetAllCarsAsync()
         {
@@ -221,8 +190,10 @@ namespace RentACarApp.Services
                     UserId = user.Id,
                     Car = car,
                     User = user
+
                 });
 
+                car.RenterId = userId;
                 await context.SaveChangesAsync();
             }
         }
