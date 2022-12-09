@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentACarApp.Data;
 
@@ -11,9 +12,10 @@ using RentACarApp.Data;
 namespace RentACarApp.Data.Migrations
 {
     [DbContext(typeof(RentACarAppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209192813_renterid")]
+    partial class renterid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -466,16 +468,16 @@ namespace RentACarApp.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9389ca31-9be3-4c67-af11-cdc6488cecee",
+                            ConcurrencyStamp = "2abf6196-4085-4945-a36f-09ac6a262acb",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "agent@mail.com",
                             NormalizedUserName = "agent@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECE8R8SWdvpIo5hrzxcPrlSF2XMB4wOPv4r4msTw7aITQ7IzV3wtxpv+W0a9ELIIig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMYtv9CY6/r1Qv+ho0C6u6AIFBbF1WqTY3xI74fMU+FMun5Sz6RKAjZ3kA2ub7pMyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "667b3c45-fd98-4637-97a2-fd06d2f6968f",
+                            SecurityStamp = "403ca3e1-c5dd-451c-b040-699e068a38ce",
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com"
                         },
@@ -483,16 +485,16 @@ namespace RentACarApp.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "19a8ab4b-5b71-4567-8090-bf2e45264ae5",
+                            ConcurrencyStamp = "636a3d27-cf3a-46d9-b34c-b4c6466e418a",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJrHTjTq3SFbV3Rqs6BSYdIZ6kygNV5DVBpCKAJG1Av73PnW6seOA5LhTWow+HVEFg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIklQ5YW3+aKO3I+2dkqvBOz2dbnbBMH/V9tPnYH6RqKG+3pRgwWbYODSqb4SqrSWA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4fdf4384-925a-45bc-a0d6-21c3c33b33be",
+                            SecurityStamp = "fa9ca1f5-9679-4638-8509-d030d5fdcc59",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });

@@ -25,7 +25,7 @@ namespace RentACarApp.Models
         public string? Engine { get ; set; }
 
         [Display(Name = "Is Rented")]
-        public bool IsRented { get; init; }
+        public bool IsRented { get; set; } 
     }
 }
 

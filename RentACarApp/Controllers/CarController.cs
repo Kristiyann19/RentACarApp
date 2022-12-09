@@ -49,6 +49,7 @@ namespace RentACarApp.Controllers
             {
                 var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 await carService.RentCarToCartAsync(carId, userId);
+                
             }
             catch (Exception)
             {

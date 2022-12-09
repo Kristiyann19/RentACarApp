@@ -29,37 +29,28 @@
             <h6>(@(car.IsRented ? "Rented" : "Not Rented"))</h6>
             @if (User?.Identity?.IsAuthenticated ?? false)
             {
-                @*Must edit the form of rent*@
-                
-
                 @if (!car.IsRented)
                 {
                     <form class="input-group-sm" asp-controller="Car" asp-action="RentCarToCart" asp-route-carId="@car.Id">
-                <input type="submit" value="Rent" class="fs-6 btn btn-success mb-3 p-2" />
-                </form>
+                        <input type="submit" value="Rent" class="fs-6 btn btn-success mb-3 p-2" />
+                    </form>
+                    
                 }
                 else
                 {
                     <form class="input-group-sm" asp-controller="Car" asp-action="Delete" asp-route-carId="@car.Id">
-                <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
-            </form> 
-
-
-                    @*<form asp-controller="House" asp-action="Leave"
-                  asp-route-id="@car.Id" method="post">
-                        <input class="btn btn-primary" type="submit" value="Leave" />
-                    </form>*@
+                        <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
+                   </form> 
                 }
-            <form class="input-group-sm" asp-controller="Car" asp-action="Delete" asp-route-carId="@car.Id">
-                <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
-            </form> 
-
-            }
+                    <form class="input-group-sm" asp-controller="Car" asp-action="Delete" asp-route-carId="@car.Id">
+                        <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
+                    </form> 
+                }
             
             
-            <form class="input-group-sm" asp-controller="Car" asp-action="Details" asp-route-carId="@car.Id">
-                <input type="submit" value="Details" class="fs-6 btn btn-success mb-3 p-2" />
-            </form>
+                    <form class="input-group-sm" asp-controller="Car" asp-action="Details" asp-route-carId="@car.Id">
+                        <input type="submit" value="Details" class="fs-6 btn btn-success mb-3 p-2" />
+                    </form>
         </div>
     }
 </div> 

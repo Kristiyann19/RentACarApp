@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RentACarApp.Data;
 
@@ -11,9 +12,10 @@ using RentACarApp.Data;
 namespace RentACarApp.Data.Migrations
 {
     [DbContext(typeof(RentACarAppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209185236_sss")]
+    partial class sss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,9 +232,6 @@ namespace RentACarApp.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("RenterId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("TypeCarId")
                         .HasColumnType("int");
 
@@ -242,8 +241,6 @@ namespace RentACarApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EngineId");
-
-                    b.HasIndex("RenterId");
 
                     b.HasIndex("TypeCarId");
 
@@ -466,16 +463,16 @@ namespace RentACarApp.Data.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9389ca31-9be3-4c67-af11-cdc6488cecee",
+                            ConcurrencyStamp = "88772a38-39de-4759-9732-a59a9b94fe91",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "agent@mail.com",
                             NormalizedUserName = "agent@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECE8R8SWdvpIo5hrzxcPrlSF2XMB4wOPv4r4msTw7aITQ7IzV3wtxpv+W0a9ELIIig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOo52QbtFfeM4xn6W1114gExus/2+RhpvbP5duigdy4cjkGsgAQ8fkyEheP7dVtnKA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "667b3c45-fd98-4637-97a2-fd06d2f6968f",
+                            SecurityStamp = "65d15d16-99e5-414b-8828-5ef8f821ca73",
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com"
                         },
@@ -483,16 +480,16 @@ namespace RentACarApp.Data.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "19a8ab4b-5b71-4567-8090-bf2e45264ae5",
+                            ConcurrencyStamp = "02794310-8df8-43ce-8e75-0a4e05a1e0fb",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJrHTjTq3SFbV3Rqs6BSYdIZ6kygNV5DVBpCKAJG1Av73PnW6seOA5LhTWow+HVEFg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEANh6cktTz5SKjVN180iaESRGt3U5TrT6iYK1NlWjuS99xZDKR0+pRJ8MTYBEvnwYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4fdf4384-925a-45bc-a0d6-21c3c33b33be",
+                            SecurityStamp = "af701ec4-6303-444f-855d-a6350b40c151",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
@@ -583,10 +580,6 @@ namespace RentACarApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RentACarApp.Data.Entities.User", "Renter")
-                        .WithMany()
-                        .HasForeignKey("RenterId");
-
                     b.HasOne("RentACarApp.Data.Entities.TypeCar", "TypeCar")
                         .WithMany("Cars")
                         .HasForeignKey("TypeCarId")
@@ -594,8 +587,6 @@ namespace RentACarApp.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Engine");
-
-                    b.Navigation("Renter");
 
                     b.Navigation("TypeCar");
                 });

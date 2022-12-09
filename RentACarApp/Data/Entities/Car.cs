@@ -45,7 +45,12 @@ namespace RentACarApp.Data.Entities
         [ForeignKey(nameof(TypeCarId))]
         public TypeCar TypeCar { get; set; }
 
-        public bool IsRented { get; set; }
+        public string? RenterId { get; set; }
+
+        [ForeignKey(nameof(RenterId))]
+        public User? Renter { get; set; }
+
+        public bool IsRented { get; set; } 
 
         public List<UserCars> UsersCars { get; set; } = new List<UserCars>();
 

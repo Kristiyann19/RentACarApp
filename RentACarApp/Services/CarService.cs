@@ -34,12 +34,14 @@ namespace RentACarApp.Services
                     Make = c.Make,
                     Model = c.Model,
                     Year = c.Year,
-                    Color = c.Color,    
+                    Color = c.Color,
                     HorsePower = c.HorsePower,
                     TypeCar = c.TypeCar.Name,
                     Engine = c.Engine.Name,
                     Price = c.Price,
-                    ImageUrl = c.ImageUrl
+                    ImageUrl = c.ImageUrl,
+                    IsRented = c.RenterId != null
+
                 });
         }
 
@@ -91,32 +93,13 @@ namespace RentACarApp.Services
                     Color = c.Car.Color,
                     HorsePower = c.Car.HorsePower,
                     Price = c.Car.Price,
-                    ImageUrl = c.Car.ImageUrl
+                    ImageUrl = c.Car.ImageUrl,
+                    IsRented = c.Car.IsRented = true
+
                 });
         }
 
-        public async Task RemoveCarFromCartAsync(int carId, string userId)
-        {
-            var user = await context.Users
-                .Where(u => u.Id == userId)
-                .Include(u => u.UsersCars)
-                .FirstOrDefaultAsync();
-
-            if (user == null)
-            {
-                throw new ArgumentException("Invalid User Id");
-            }
-
-
-            var car = user.UsersCars.FirstOrDefault(c => c.CarId == carId);
-
-            if (car != null)
-            {
-                user.UsersCars.Remove(car);
-
-                await context.SaveChangesAsync();    
-            }
-        }
+        
 
         public async Task AddCarForRentAsync(AddCarViewModel modell)
         {
@@ -130,7 +113,10 @@ namespace RentACarApp.Services
                 TypeCarId = modell.TypeCarId,
                 EngineId = modell.EngineId,
                 Price = modell.Price,
-                ImageUrl = modell.ImageUrl
+                ImageUrl = modell.ImageUrl,
+                IsRented = true
+                
+               
             };
 
             await context.Cars.AddAsync(entity);
@@ -153,6 +139,36 @@ namespace RentACarApp.Services
 
             context.Remove(car);
             context.SaveChanges();
+        }
+
+
+        public async Task RemoveCarFromCartAsync(int carId, string userId)
+        {
+            var user = await context.Users
+                .Where(u => u.Id == userId)
+                .Include(u => u.UsersCars)
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid User Id");
+            }
+            var car = await context.Cars
+                .Where(c => c.Id == carId)
+                .Include(c => c.TypeCar)
+                .Include(c => c.Engine)
+                .FirstOrDefaultAsync();
+
+            var carFromUsersCars = user.UsersCars.FirstOrDefault(c => c.CarId == carId);
+
+            if (car != null)
+            {
+                
+                user.UsersCars.Remove(carFromUsersCars);
+                car.RenterId = null;
+                car.IsRented = false;
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task RentCarToCartAsync(int carId, string userId)
@@ -188,10 +204,15 @@ namespace RentACarApp.Services
                     User = user
 
                 });
-
+                car.RenterId = userId;
+                car.IsRented = true;
                 await context.SaveChangesAsync();
             }
         }
 
+        public bool IsRented()
+        {
+            return context.Cars.Where(x => x.IsRented == true).Any();
+        }
     }
 }
