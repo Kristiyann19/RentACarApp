@@ -20,10 +20,6 @@ namespace RentACarApp.Services
         public bool Exists(int id)
         => context.Cars.Any(c => c.Id == id);
 
-
-        public bool isRented(int id)
-        => context.Cars.Find(id).RenterId != null;
-
         public async Task<IEnumerable<CarViewModel>> GetAllCarsAsync()
         {
             var entities = await context.Cars
@@ -193,7 +189,6 @@ namespace RentACarApp.Services
 
                 });
 
-                car.RenterId = userId;
                 await context.SaveChangesAsync();
             }
         }

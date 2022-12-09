@@ -9,8 +9,6 @@ namespace RentACarApp.Contracts
 
         bool Exists(int id);
 
-        bool isRented(int id);
-
         Task<IEnumerable<Engine>> GetEngneAsync();
 
         Task<IEnumerable<TypeCar>> GetTypeCarAsync();
