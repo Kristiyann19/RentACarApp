@@ -29,8 +29,8 @@ builder.Services.AddAuthentication()
     .AddFacebook(options =>
     {
         //TODO: Hide them somewhere. They should not be here.
-        options.AppId = "865317174714956";
-        options.AppSecret = "b0861b84303a22ed9af05bf4361798ae";
+        options.AppId = "497465629070832";
+        options.AppSecret = "c98187fb17eb7e64ef80cac08cce3b28";
     });
 
 builder.Services.AddControllersWithViews();

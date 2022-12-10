@@ -17,6 +17,7 @@ namespace RentACarApp.Controllers
             agentService = _agentService;
         }
 
+
         [HttpGet]
         public IActionResult Become()
         {
@@ -49,7 +50,7 @@ namespace RentACarApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            if (agentService.UserWithPhoneNumberExists(model.PhoneNumber))
+            if (agentService.AgentWithPhoneNumberExists(model.PhoneNumber))
             {
                 TempData[MessageConstant.ErrorMessage] = "The phone already exists";
 

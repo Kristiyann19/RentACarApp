@@ -12,6 +12,5 @@ namespace RentACarApp.Models
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
-        //public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 }

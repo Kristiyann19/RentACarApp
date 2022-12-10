@@ -7,10 +7,21 @@ namespace RentACarApp.Data
 {
     public class RentACarAppDbContext : IdentityDbContext<User>
     {
+        private bool seedDb;
 
-        public RentACarAppDbContext(DbContextOptions<RentACarAppDbContext> options)
+        public RentACarAppDbContext(DbContextOptions<RentACarAppDbContext> options, bool seed = true)
             : base(options)
         {
+            if (Database.IsRelational())
+            {
+                Database.Migrate();
+            }
+            else
+            {
+                Database.EnsureCreated();
+            }
+
+            seedDb = seed;
         }
 
         public DbSet<Car> Cars { get; set; }
@@ -49,11 +60,15 @@ namespace RentACarApp.Data
                 .HasMaxLength(70)
                 .IsRequired();
 
-            builder.ApplyConfiguration(new TypeCarConfiguration());
-            builder.ApplyConfiguration(new EngineConfiguration());
-            builder.ApplyConfiguration(new CarConfiguration());
-            builder.ApplyConfiguration(new AgentConfiguration());
-            builder.ApplyConfiguration(new UserConfiguration());
+            if (seedDb)
+            {
+                builder.ApplyConfiguration(new TypeCarConfiguration());
+                builder.ApplyConfiguration(new EngineConfiguration());
+                builder.ApplyConfiguration(new CarConfiguration());
+                builder.ApplyConfiguration(new AgentConfiguration());
+                builder.ApplyConfiguration(new UserConfiguration());
+            }
+            
 
 
             base.OnModelCreating(builder);

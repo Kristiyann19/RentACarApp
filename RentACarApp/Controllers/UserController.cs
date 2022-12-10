@@ -77,8 +77,6 @@ namespace RentACarApp.Controllers
 
             var model = new LoginViewModel();
 
-            //model.ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             return View(model);
         }
 
@@ -108,7 +106,6 @@ namespace RentACarApp.Controllers
             ModelState.AddModelError("", "Invalid login");
 
             return View(model);
-
         }
 
         public async Task<IActionResult> Logout()
@@ -117,49 +114,5 @@ namespace RentACarApp.Controllers
 
             return RedirectToAction("index", "Home");
         }
-
-
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public IActionResult ExternalLogin(string provider, string? returnUrl = null)
-        //{
-        //    // Request a redirect to the external login provider.
-        //    var redirectUrl = Url.Action("ExternalLoginCallback", "User", new { returnUrl });
-        //    var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-        //    return new ChallengeResult(provider, properties);
-        //}
-
-        //[AllowAnonymous]
-        //public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
-        //{
-        //    returnUrl = returnUrl ?? Url.Content("~/");
-        //    if (remoteError != null)
-        //    {
-        //        TempData["ErrorMessage"] = $"Error from external provider: {remoteError}";
-        //        return RedirectToAction("Login", new { ReturnUrl = returnUrl });
-        //    }
-        //    var info = await signInManager.GetExternalLoginInfoAsync();
-        //    if (info == null)
-        //    {
-        //        TempData["ErrorMessage"] = "Error loading external login information.";
-        //        return RedirectToAction("Login", new { ReturnUrl = returnUrl });
-        //    }
-
-        //    // Sign in the user with this external login provider if the user already has a login.
-        //    var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
-        //    if (result.Succeeded)
-        //    {
-        //        return LocalRedirect(returnUrl);
-        //    }
-        //    if (result.IsLockedOut)
-        //    {
-        //        return RedirectToPage("./Lockout");
-        //    }
-        //    else
-        //    {
-        //        //Can change it to diffrent thing.
-        //        return RedirectToAction("Login");
-        //    }
-        //}
     }
 }

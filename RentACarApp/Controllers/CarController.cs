@@ -9,6 +9,7 @@ using System.Security.Claims;
 
 namespace RentACarApp.Controllers
 {
+    [Authorize]
     public class CarController : Controller
     {
         private readonly ICarService carService;
@@ -125,7 +126,6 @@ namespace RentACarApp.Controllers
             }
         }
 
-        [Authorize]
         public async Task<IActionResult> Delete(int carId)
         {
             if ((carService.Exists(carId)) == false)
