@@ -64,7 +64,8 @@ namespace RentACarApp.Services
                     TypeCar = c.TypeCar.Name,
                     Engine = c.Engine.Name,
                     Price = c.Price,
-                    ImageUrl = c.ImageUrl
+                    ImageUrl = c.ImageUrl,
+                    IsRented = c.RenterId != null
                 }).FirstAsync();
 
         }
