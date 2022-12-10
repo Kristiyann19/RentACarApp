@@ -68,8 +68,14 @@ namespace RentACarApp.Services
                     Engine = c.Engine.Name,
                     Price = c.Price,
                     ImageUrl = c.ImageUrl,
-                    IsRented = c.RenterId != null
-                }).FirstAsync();
+                    IsRented = c.RenterId != null,
+                    Agent = new AgentServiceModel()
+                    {
+                        Email = c.Agent.User.Email,
+                        PhoneNumber = c.Agent.User.PhoneNumber
+                    }
+                })
+                .FirstAsync();
 
         }
 
