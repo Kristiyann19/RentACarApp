@@ -108,7 +108,9 @@ namespace RentACarApp.Controllers
                 return RedirectToAction("Become", "Agent");
             }
 
-            await carService.AddCarForRentAsync(modell);
+            int agentId = agentService.GetAgentId(User.Id());
+
+            await carService.AddCarForRentAsync(modell, agentId);
 
 
             try
@@ -124,8 +126,18 @@ namespace RentACarApp.Controllers
         }
 
         [Authorize]
-        public IActionResult Delete(int carId)
+        public async Task<IActionResult> Delete(int carId)
         {
+            if ((carService.Exists(carId)) == false)
+            {
+                return RedirectToAction("index", "home");
+            }
+
+            if ((await carService.HasAgentWithId(carId, User.Id())) == false)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
             carService.Delete(carId);
 
             return RedirectToAction("index", "home");

@@ -23,17 +23,28 @@ namespace RentACarApp.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            builder
+                .Entity<Car>()
+                .HasOne(x => x.Agent)
+                .WithMany()
+                .HasForeignKey(x => x.AgentId)
+                .OnDelete(DeleteBehavior.Restrict);
+                
+
             builder
                 .Entity<UserCars>()
                 .HasKey(x => new { x.UserId, x.CarId });
 
 
-            builder.Entity<User>()
+            builder
+                .Entity<User>()
                 .Property(u => u.UserName)
                 .HasMaxLength(30)
                 .IsRequired();
 
-            builder.Entity<User>()
+            builder
+                .Entity<User>()
                 .Property(u => u.Email)
                 .HasMaxLength(70)
                 .IsRequired();

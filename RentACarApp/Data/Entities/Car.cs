@@ -28,7 +28,7 @@ namespace RentACarApp.Data.Entities
 
         [Required]
         [MaxLength(30)]
-        public string Color { get; set; }
+        public string Color { get; set; } = null!;
 
         [Required]
         public string ImageUrl { get; set; } = null!;
@@ -37,18 +37,24 @@ namespace RentACarApp.Data.Entities
         public int EngineId { get; set; } 
 
         [ForeignKey(nameof(EngineId))]
-        public Engine Engine { get; set; }
+        public Engine Engine { get; set; } = null!;
 
         [Required]
         public int TypeCarId { get; set; }
 
         [ForeignKey(nameof(TypeCarId))]
-        public TypeCar TypeCar { get; set; }
+        public TypeCar TypeCar { get; set; } = null!;
 
         public string? RenterId { get; set; }
 
         [ForeignKey(nameof(RenterId))]
         public User? Renter { get; set; }
+
+        [Required]
+        public int AgentId { get; set; }
+
+        [ForeignKey(nameof(AgentId))]
+        public Agent Agent { get; set; }
 
         public bool IsRented { get; set; } 
 

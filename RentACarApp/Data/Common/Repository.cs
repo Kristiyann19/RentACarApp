@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using RentACarApp.Data;
 using System.Linq.Expressions;
 
-namespace HouseRentingSystem.Infrastructure.Data.Common
+namespace RentACarApp.Data.Common
 {
     /// <summary>
     /// Implementation of repository access methods

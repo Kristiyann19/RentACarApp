@@ -27,7 +27,8 @@ namespace RentACarApp.Data.Configurations
                     HorsePower = 358,
                     ImageUrl = "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/KDgVJ2G8.NfXWiaxfK-(edit).jpg?t=164667913335",
                     TypeCarId = 6,
-                    EngineId = 2
+                    EngineId = 2,
+                    AgentId = 1
                 },
 
                 new Car
@@ -41,7 +42,8 @@ namespace RentACarApp.Data.Configurations
                     HorsePower = 510,
                     ImageUrl = "https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/mercedes-benz-c63s-amg-2015-australia-%285%29.jpg",
                     TypeCarId = 4,
-                    EngineId = 2
+                    EngineId = 2,
+                    AgentId = 1
                 },
 
                 new Car
@@ -55,7 +57,8 @@ namespace RentACarApp.Data.Configurations
                     HorsePower = 420,
                     ImageUrl = "https://thedriven.io/wp-content/uploads/2019/09/car-sales-model-s-2017.jpg",
                     TypeCarId = 4,
-                    EngineId = 3
+                    EngineId = 3,
+                    AgentId = 1
                 }
 
             };

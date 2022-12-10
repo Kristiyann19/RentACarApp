@@ -16,6 +16,6 @@ namespace RentACarApp.Data.Entities
         public string UserId { get; set; } = null!;
 
         [ForeignKey(nameof(UserId))]
-        public User User { get; set; }
+        public User User { get; set; } = null!;
     }
 }

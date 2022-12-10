@@ -9,7 +9,9 @@ namespace RentACarApp.Contracts
 
         bool IsRented();
 
-        bool Exists(int id);
+        bool Exists(int carId);
+
+        Task<bool> HasAgentWithId(int carId, string currentUserId);
 
         Task<IEnumerable<Engine>> GetEngneAsync();
 
@@ -21,7 +23,7 @@ namespace RentACarApp.Contracts
 
         Task RemoveCarFromCartAsync(int carId, string userId);
 
-        Task AddCarForRentAsync(AddCarViewModel modell);
+        Task AddCarForRentAsync(AddCarViewModel modell, int agentId);
 
         Task<IEnumerable<CarViewModel>> GetRentedAsync(string userId);
 

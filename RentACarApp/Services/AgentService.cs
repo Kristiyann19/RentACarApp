@@ -37,6 +37,12 @@ namespace RentACarApp.Services
         //        .AnyAsync(h => h.RenterId == userId);
         //}
 
+        public int GetAgentId(string userId)
+        {
+            return (context.Agents
+                .FirstOrDefault(a => a.UserId == userId))?.Id ?? 0;
+        }
+
         public bool UserWithPhoneNumberExists(string phoneNumber)
         {
             return context.Agents

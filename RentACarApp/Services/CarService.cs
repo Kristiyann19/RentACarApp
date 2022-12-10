@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RentACarApp.Contracts;
 using RentACarApp.Data;
+using RentACarApp.Data.Common;
 using RentACarApp.Data.Entities;
 using RentACarApp.Models;
 using System.Linq;
@@ -9,16 +10,17 @@ namespace RentACarApp.Services
 {
     public class CarService : ICarService
     {
-        private readonly RentACarAppDbContext context;
+        private readonly RentACarAppDbContext context;  
 
         public CarService(RentACarAppDbContext _context)
         {
             context = _context;
+            
         }
 
 
         public bool Exists(int id)
-        => context.Cars.Any(c => c.Id == id);
+        =>  context.Cars.Any(c => c.Id == id);
 
         public async Task<IEnumerable<CarViewModel>> GetAllCarsAsync()
         {
@@ -41,6 +43,7 @@ namespace RentACarApp.Services
                     Price = c.Price,
                     ImageUrl = c.ImageUrl,
                     IsRented = c.RenterId != null
+                    
 
                 });
         }
@@ -102,7 +105,7 @@ namespace RentACarApp.Services
 
         
 
-        public async Task AddCarForRentAsync(AddCarViewModel modell)
+        public async Task AddCarForRentAsync(AddCarViewModel modell, int agentId)
         {
             var entity = new Car()
             {
@@ -115,9 +118,10 @@ namespace RentACarApp.Services
                 EngineId = modell.EngineId,
                 Price = modell.Price,
                 ImageUrl = modell.ImageUrl,
-                IsRented = true
-                
-               
+                IsRented = true,
+                AgentId = agentId
+
+
             };
 
             await context.Cars.AddAsync(entity);
@@ -214,6 +218,22 @@ namespace RentACarApp.Services
         public bool IsRented()
         {
             return context.Cars.Where(x => x.IsRented == true).Any();
+        }
+
+        public async Task<bool> HasAgentWithId(int carId, string currentUserId)
+        {
+            bool result = false;
+            var car = await context.Cars 
+                .Where(c => c.Id == carId)
+                .Include(c => c.Agent)
+                .FirstOrDefaultAsync();
+
+            if (car?.Agent != null && car.Agent.UserId == currentUserId)
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }

@@ -31,6 +31,7 @@
             {
                 @if (!car.IsRented)
                 {
+                    
                     <form class="input-group-sm" asp-controller="Car" asp-action="RentCarToCart" asp-route-carId="@car.Id">
                         <input type="submit" value="Rent" class="fs-6 btn btn-success mb-3 p-2" />
                     </form>
@@ -38,16 +39,16 @@
                 }
                 else
                 {
-                            <div class="card-body">
+                       <div class="card-body">
                             Rented.
-                        </div> 
+                       </div> 
                 }
                     <form class="input-group-sm" asp-controller="Car" asp-action="Delete" asp-route-carId="@car.Id">
                         <input type="submit" value="Delete" class="fs-6 btn btn-danger mb-3 p-2" />
                     </form> 
                 }
             
-            
+                    
                     <form class="input-group-sm" asp-controller="Car" asp-action="Details" asp-route-carId="@car.Id">
                         <input type="submit" value="Details" class="fs-6 btn btn-success mb-3 p-2" />
                     </form>
