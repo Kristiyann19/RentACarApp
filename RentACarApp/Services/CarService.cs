@@ -42,9 +42,7 @@ namespace RentACarApp.Services
                     Engine = c.Engine.Name,
                     Price = c.Price,
                     ImageUrl = c.ImageUrl,
-                    IsRented = c.RenterId != null
-                    
-
+                    IsRented = c.RenterId != null    
                 });
         }
 
