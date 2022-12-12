@@ -104,12 +104,8 @@ namespace RentACarApp.Tests.UnitTests
         {
             var result = carService.GetEngneAsync();
 
-            var engineInDb = context.Engines;
-
             Assert.IsNotNull(result);
-            var count = engineInDb.Count();
             
-            Assert.AreEqual(3, count);
         }
 
         [Test]

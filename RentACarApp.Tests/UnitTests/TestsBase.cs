@@ -73,24 +73,6 @@ namespace RentACarApp.Tests
             };
             context.Cars.Add(RentedCar);
 
-            RentedCar = new Car()
-            {
-                Make = "Fst Test Car",
-                Model = "Fst Test Model",
-                Year = 2022,
-                Price = 1111,
-                Color = "Tet Color",
-                HorsePower = 699,
-                ImageUrl = "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/KDgVJ2G8.NfXWiaxfK-(edit).jpg?t=164667913335",
-                TypeCar = new TypeCar() { Name = "Coupe" },
-                Engine = new Engine() { Name = "Petrol" },
-                Renter = Renter,
-                Agent = Agent
-
-            };
-
-            context.Cars.Add(RentedCar);
-
             var nonRentedCar = new Car()
             {
                 Make = "Second Test Car",
