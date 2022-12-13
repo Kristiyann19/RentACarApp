@@ -1,4 +1,6 @@
-﻿namespace RentACarApp.Contracts
+﻿using RentACarApp.Models;
+
+namespace RentACarApp.Contracts
 {
     public interface IAgentService
     {
@@ -6,7 +8,7 @@
 
         bool AgentWithPhoneNumberExists(string phoneNumber);
 
-        void Create(string userId, string phoneNumber);
+        void Create(string userId, string phoneNumber,string firstName, string lastName);
 
         int GetAgentId(string userId);
 

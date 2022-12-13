@@ -36,6 +36,19 @@ namespace RentACarApp.Controllers
             return View(carModel);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> AgentDetails(int carId)
+        {
+            if (!carService.Exists(carId))
+            {
+                return BadRequest();
+            }
+
+            var agentModel = await carService.GetAgentDetails(carId);
+
+            return View(agentModel);
+        }
+
 
         [AllowAnonymous]
         public IActionResult BackToList()

@@ -37,20 +37,21 @@ namespace RentACarApp.Tests
                 Id = "RenterUserId",
                 Email = "renter@mail.com",
                 UserName = "Renter",
-                LastName = "Renterov"
+                
             };
 
             context.Users.Add(Renter);
 
             Agent = new Agent()
             {
+                FirstName = "first name test",
+                LastName = "last name test",
                 PhoneNumber = "+359882365050",
                 User = new User()
                 {
                     Id = "TestUserId",
                     Email = "user@mail.com",
                     UserName = "Test",
-                    LastName = "Testov"
                 }
             };
 

@@ -57,9 +57,11 @@ namespace RentACarApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            agentService.Create(userId, model.PhoneNumber);
+            agentService.Create(userId, model.PhoneNumber, model.FirstName, model.LastName);
 
             return RedirectToAction("Index", "Home");
         }
+
+        
     }
 }

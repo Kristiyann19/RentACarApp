@@ -13,6 +13,14 @@ namespace RentACarApp.Data.Entities
         public string PhoneNumber { get; set; } = null!;
 
         [Required]
+        [StringLength(50)]
+        public string? FirstName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string? LastName { get; set; }
+
+        [Required]
         public string UserId { get; set; } = null!;
 
         [ForeignKey(nameof(UserId))]

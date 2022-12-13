@@ -1,6 +1,7 @@
 ﻿using RentACarApp.Contracts;
 using RentACarApp.Data;
 using RentACarApp.Data.Entities;
+using RentACarApp.Models;
 
 namespace RentACarApp.Services
 {
@@ -13,12 +14,14 @@ namespace RentACarApp.Services
             context = _context;
         }
 
-        public void Create(string userId, string phoneNumber)
+        public void Create(string userId, string phoneNumber, string firstName, string lastName)
         {
             var agent = new Agent()
             {
                 UserId = userId,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = firstName,
+                LastName = lastName        
             };
 
             context.Agents.Add(agent);
@@ -41,5 +44,7 @@ namespace RentACarApp.Services
             return context.Agents
                 .Any(a => a.PhoneNumber == phoneNumber);
         }
+
+        
     }
 }

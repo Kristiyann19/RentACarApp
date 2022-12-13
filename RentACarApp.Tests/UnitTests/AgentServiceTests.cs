@@ -53,7 +53,7 @@ namespace RentACarApp.Tests.UnitTests
             var agentsCountBefore = context.Agents.Count();
 
             //Act
-            agentService.Create(Agent.UserId, Agent.PhoneNumber);   
+            agentService.Create(Agent.UserId, Agent.PhoneNumber, Agent.FirstName, Agent.LastName);   
 
             //Assert
             var agentsCountAfter = context.Agents.Count();

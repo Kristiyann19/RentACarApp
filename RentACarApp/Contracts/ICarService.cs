@@ -9,6 +9,8 @@ namespace RentACarApp.Contracts
 
         Task<CarViewModel> GetCarDetails(int carId);
 
+        Task<CarViewModel> GetAgentDetails(int carId); 
+
         Task RentCarToCartAsync(int carId, string userId);
 
         Task RemoveCarFromCartAsync(int carId, string userId);

@@ -12,6 +12,8 @@ namespace RentACarApp.Data.Configurations
             {
                 Id = 1,
                 PhoneNumber = "+359888888888",
+                FirstName = "Agent",
+                LastName = "Agentov",
                 UserId = "dea12856-c198-4129-b3f3-b893d8395082"
             });
         }

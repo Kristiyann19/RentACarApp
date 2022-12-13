@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RentACarApp.Contracts;
 using RentACarApp.Data;
-using RentACarApp.Data.Common;
 using RentACarApp.Data.Entities;
 using RentACarApp.Models;
 using System.Linq;
@@ -70,7 +69,9 @@ namespace RentACarApp.Services
                     Agent = new AgentServiceModel()
                     {
                         Email = c.Agent.User.Email,
-                        PhoneNumber = c.Agent.User.PhoneNumber
+                        PhoneNumber = c.Agent.PhoneNumber,
+                        FirstName = c.Agent.FirstName,
+                        LastName = c.Agent.LastName
                     }
                 })
                 .FirstAsync();
@@ -127,7 +128,8 @@ namespace RentACarApp.Services
 
 
             };
-
+             
+            
             await context.Cars.AddAsync(entity);
             await context.SaveChangesAsync();
         }
@@ -238,6 +240,36 @@ namespace RentACarApp.Services
             }
 
             return result;
+        }
+
+        public async Task<CarViewModel> GetAgentDetails(int carId)
+        {
+            return await context.Cars
+                 .Where(c => c.Id == carId)
+                 .Include(c => c.Engine)
+                 .Include(c => c.TypeCar)
+                 .Select(c => new CarViewModel
+                 {
+                     Id = c.Id,
+                     Make = c.Make,
+                     Model = c.Model,
+                     Year = c.Year,
+                     Color = c.Color,
+                     HorsePower = c.HorsePower,
+                     TypeCar = c.TypeCar.Name,
+                     Engine = c.Engine.Name,
+                     Price = c.Price,
+                     ImageUrl = c.ImageUrl,
+                     IsRented = c.RenterId != null,
+                     Agent = new AgentServiceModel()
+                     {
+                         Email = c.Agent.User.Email,
+                         PhoneNumber = c.Agent.PhoneNumber,
+                         FirstName = c.Agent.FirstName,
+                         LastName = c.Agent.LastName
+                     }
+                 })
+                .FirstAsync();
         }
     }
 }
