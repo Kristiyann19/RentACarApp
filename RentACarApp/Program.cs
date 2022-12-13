@@ -12,6 +12,8 @@ builder.Services.AddDbContext<RentACarAppDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddSignalR();
+
 builder.Services.AddDefaultIdentity<User>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -66,16 +68,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-//app.MapControllerRoute(
-//    name: "SubjectRoute",
-//    url: "Subjects",
-//    defaults: new { controller = "Subjects", action = "Subjects" }
-//);
-
-//app.MapControllerRoute(
-//    name: "Default",
-//    url: "{action}/{id}",
-//    defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
-//);
 
 app.Run();
