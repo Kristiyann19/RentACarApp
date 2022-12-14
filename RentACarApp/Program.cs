@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RentACarApp.ChatHub;
 using RentACarApp.Contracts;
 using RentACarApp.Data;
 using RentACarApp.Data.Entities;
 using RentACarApp.Services;
-using RentACarApp.ChatHub;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,6 @@ builder.Services.AddDbContext<RentACarAppDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddSignalR();
 
 builder.Services.AddDefaultIdentity<User>(options =>
 {
@@ -30,6 +31,9 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddSignalR();
 
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddTransient<IAgentService, AgentService>();
