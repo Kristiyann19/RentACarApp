@@ -7,6 +7,9 @@
     @if (SignInManager.IsSignedIn(User))
     { 
          
+        <form class="form-inline" asp-controller="Home" asp-action="Contact">
+                <button type="submit" class="nav-link btn btn-link text-dark">Contact Agent</button>
+            </form>
 
         <li class="nav-item dropdown">
             <div class="dropdown">

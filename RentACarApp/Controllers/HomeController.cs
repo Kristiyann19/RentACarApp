@@ -30,5 +30,10 @@ namespace RentACarApp.Controllers
 
             return View(cars);
         }
+
+        public async Task<IActionResult> Contact()
+        {
+            return View();
+        }
     }
 }
