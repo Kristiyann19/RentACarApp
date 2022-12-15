@@ -12,7 +12,5 @@ namespace RentACarApp.Models
 
         public string? LastName { get; set; } = null;
 
-        public IEnumerable<Car> Cars { get; set; } = new List<Car>();
-
     }
 }

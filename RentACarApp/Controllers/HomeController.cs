@@ -31,14 +31,14 @@ namespace RentACarApp.Controllers
             return View(cars);
         }
 
-        public async Task<IActionResult> Contact()
+        public IActionResult Contact()
         {
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Login", "User");
             }
 
-            return View();
+            return View(); 
         }
     }
 }

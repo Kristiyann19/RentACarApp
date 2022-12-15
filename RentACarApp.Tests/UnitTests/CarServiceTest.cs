@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using RentACarApp.Contracts;
 using RentACarApp.Data.Entities;
+using RentACarApp.Models;
 using RentACarApp.Services;
 using System;
 using System.Collections.Generic;
@@ -126,5 +127,28 @@ namespace RentACarApp.Tests.UnitTests
 
             Assert.IsTrue(result);
         }
+
+        [Test]
+        public void AddCarForRentAsync_ShouldAddCorrectCar()
+        {
+
+            var carCountBefore = context.Cars.Count();
+
+            var car = new AddCarViewModel()
+            {
+                Make = "test",
+                Model = "test",
+                Year = 200,
+                Color = "test",
+                ImageUrl = "https://media.carsandbids.com/cdn-cgi/image/width=1800,quality=70/438ad923cef6d8239e95d61e7d6849486bae11d9/photos/KDgVJ2G8.NfXWiaxfK-(edit).jpg?t=164667913335",
+
+            };
+            var carInDb = carService.AddCarForRentAsync(car, Agent.Id);
+            var carCountAfter = context.Cars.Count();
+        
+            Assert.IsNotNull(carInDb);
+            Assert.That(carCountBefore, Is.EqualTo(carCountAfter - 1));
+        }
+
     }
 }

@@ -49,6 +49,20 @@ namespace RentACarApp.Data.Configurations
 
             users.Add(user);
 
+            user = new User()
+            {
+                Id = "78551b5d-fd8d-4711-83b5-ed39ae47c072",
+                UserName = "admin@mail.com",
+                NormalizedUserName = "admin@mail.com",
+                Email = "admin@mail.com",
+                NormalizedEmail = "admin@mail.com"
+            };
+
+            user.PasswordHash =
+            hasher.HashPassword(user, "admin123");
+
+            users.Add(user);
+
             return users;
         }
     }
