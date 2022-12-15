@@ -33,6 +33,11 @@ namespace RentACarApp.Controllers
 
         public async Task<IActionResult> Contact()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
             return View();
         }
     }
