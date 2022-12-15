@@ -5,6 +5,7 @@ using RentACarApp.ChatHub;
 using RentACarApp.Contracts;
 using RentACarApp.Data;
 using RentACarApp.Data.Entities;
+using RentACarApp.Extensions;
 using RentACarApp.Services;
 
 
@@ -47,6 +48,8 @@ builder.Services.AddTransient<IAgentService, AgentService>();
 var app = builder.Build();
 
 app.MapHub<ChatHub>("/chatHub");
+
+app.SeedAmin();
 
 if (app.Environment.IsDevelopment())
 {

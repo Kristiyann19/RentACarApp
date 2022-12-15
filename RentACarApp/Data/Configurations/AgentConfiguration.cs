@@ -32,11 +32,11 @@ namespace RentACarApp.Data.Configurations
 
             agent = new Agent()
             {
-                Id = 5,
+                Id = 6,
                 PhoneNumber = "+359123456789",
                 FirstName = "admin@mail.com",
                 LastName = "admin@mail.com",
-                UserId = "78551b5d - fd8d - 4711 - 83b5 - ed39ae47c072"
+                UserId = "78551b5d-fd8d-4711-83b5-ed39ae47c072"
             };
 
             agents.Add(agent);
