@@ -66,13 +66,7 @@ namespace RentACarApp.Services
                     Price = c.Price,
                     ImageUrl = c.ImageUrl,
                     IsRented = c.RenterId != null,
-                    Agent = new AgentServiceModel()
-                    {
-                        Email = c.Agent.User.Email,
-                        PhoneNumber = c.Agent.PhoneNumber,
-                        FirstName = c.Agent.FirstName,
-                        LastName = c.Agent.LastName
-                    }
+                    
                 })
                 .FirstAsync();
 
@@ -263,6 +257,7 @@ namespace RentACarApp.Services
                      IsRented = c.RenterId != null,
                      Agent = new AgentServiceModel()
                      {
+                         UserName = c.Agent.User.UserName,
                          Email = c.Agent.User.Email,
                          PhoneNumber = c.Agent.PhoneNumber,
                          FirstName = c.Agent.FirstName,

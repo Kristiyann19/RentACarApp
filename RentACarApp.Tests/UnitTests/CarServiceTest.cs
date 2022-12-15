@@ -1,5 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.EntityFrameworkCore;
+using NUnit.Framework;
 using RentACarApp.Contracts;
+using RentACarApp.Data;
 using RentACarApp.Data.Entities;
 using RentACarApp.Models;
 using RentACarApp.Services;
@@ -15,10 +17,37 @@ namespace RentACarApp.Tests.UnitTests
     public class CarServiceTest : TestsBase
     {
         private ICarService carService;
+        private RentACarAppDbContext dbContext;
 
         [OneTimeSetUp]
         public void SetUp()
-            => carService = new CarService(context);
+        {
+            carService = new CarService(context);
+            //var options = new DbContextOptionsBuilder<RentACarAppDbContext>()
+            //    .UseInMemoryDatabase(databaseName: "RentACarAppInMemoryDb")
+            //    .Options;
+
+            //dbContext = new RentACarAppDbContext(options);
+            //dbContext.SaveChanges();
+        }
+
+
+
+        [Test]
+        public void GetCarDetails_ShouldReturnCorrect()
+        {
+            var carId = RentedCar.Id;
+
+            var result = carService.GetCarDetails(carId);
+
+            Assert.IsNotNull(result);
+
+            var carInDb = context.Cars.Find(carId);
+
+            Assert.That(result.Id, Is.EqualTo(carInDb.Id + 1));
+
+        }
+
 
         [Test]
         public void Exists_ShouldBeTrue()
@@ -82,23 +111,10 @@ namespace RentACarApp.Tests.UnitTests
             Assert.IsNotNull(result);
             Assert.That(carCountBefore, Is.EqualTo(carCountAfter - 1));
             Assert.IsNotNull(carInDb);
-           
+
         }
 
-        [Test]
-        public void GetCarDetails_ShouldReturnCorrect()
-        {
-            var carId = RentedCar.Id;
 
-            var result = carService.GetCarDetails(carId);
-
-            Assert.IsNotNull(result);
-
-            var carInDb = context.Cars.Find(carId);
-
-            Assert.That(result.Id, Is.EqualTo(carInDb.Id));
-            
-        }
 
         [Test]
         public void GetEngneAsync_ShouldReturnCorrectly()
@@ -106,14 +122,14 @@ namespace RentACarApp.Tests.UnitTests
             var result = carService.GetEngneAsync();
 
             Assert.IsNotNull(result);
-            
+
         }
 
         [Test]
         public void GetTypeCarAsync_ShouldReturnCorrectly()
         {
             var typeCars = carService.GetTypeCarAsync();
-           
+
             Assert.IsNotNull(typeCars);
         }
 
@@ -145,10 +161,50 @@ namespace RentACarApp.Tests.UnitTests
             };
             var carInDb = carService.AddCarForRentAsync(car, Agent.Id);
             var carCountAfter = context.Cars.Count();
-        
+
             Assert.IsNotNull(carInDb);
             Assert.That(carCountBefore, Is.EqualTo(carCountAfter - 1));
         }
 
+        [Test]
+        public void GetAgentDetails_ShouldWorkCorrectly()
+        {
+            var agentId = RentedCar.Agent.Id;
+
+            var result = carService.GetAgentDetails(agentId);
+
+            Assert.IsNotNull(result);
+
+            var agentInDb = context.Cars.Find(agentId);
+
+            Assert.That(result.Id, Is.EqualTo(agentInDb.Id));
+
+        }
+
+        [Test]
+        public void IsRented_ShouldReturnTrue()
+        {
+            var result = carService.IsRented();
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void GetRentedAsyncAndRentCarToCartAsync_ShouldWorkCorrectly()
+        {
+            var carId = RentedCar.Id;
+
+            var renterId = RentedCar.Renter.Id;
+
+            var result = carService.RentCarToCartAsync(carId, renterId);
+            var result2 = carService.GetRentedAsync(renterId);
+
+            Assert.IsNotNull(result2);
+            Assert.IsNotNull(result);
+
+
+        }
+
+        
     }
 }
