@@ -18,6 +18,10 @@ namespace RentACarApp.Controllers
 
         public async Task<IActionResult> Index(string SearchString)
         {
+            //if (User.IsInRole("Administrator"))
+            //{
+            //    return RedirectToAction("Index", "Home", new { area = "Admin" });
+            //}
 
             ViewData["CurrentFilter"] = SearchString;
 

@@ -146,7 +146,7 @@ namespace RentACarApp.Controllers
                 return RedirectToAction("index", "home");
             }
 
-            if ((await carService.HasAgentWithId(carId, User.Id())) == false)
+            if ((await carService.HasAgentWithId(carId, User.Id())) == false && !User.IsAdmin())
             {
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
