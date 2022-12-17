@@ -119,8 +119,6 @@ namespace RentACarApp.Services
                 ImageUrl = modell.ImageUrl,
                 IsRented = true,
                 AgentId = agentId
-
-
             };
              
             
